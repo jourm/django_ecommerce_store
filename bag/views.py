@@ -61,7 +61,7 @@ def adjust_bag(request, item_id):
 
 
 def remove_from_bag(request, item_id):
-    """Adjust the quantity of the specified product to the specified amount """
+    """Remove the item from the shopping bag"""
 
     try:
         size = None
@@ -71,14 +71,14 @@ def remove_from_bag(request, item_id):
 
         if size:
             del bag[item_id]['items_by_size'][size]
-            if not bag[item_id]['item_by_size']:
+            if not bag[item_id]['items_by_size']:
                 bag.pop(item_id)
         else:
-            bag.pop[item_id]
+            bag.pop(item_id)
 
         request.session['bag'] = bag
         return HttpResponse(status=200)
+
     except Exception as e:
         return HttpResponse(status=500)
-
 
